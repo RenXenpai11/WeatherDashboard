@@ -1,4 +1,11 @@
 # Weather Dashboard
 
 A weather dashboard application built with Svelte + TypeScript + Vite.
->>>>>>> 35769f7bef1b716ca3840879951dd0b90f7cf0c0
+
+## Environment Variables
+
+Create a local `.env` file with:
+
+VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+
+For Render deployment, add the same key under Environment Variables.

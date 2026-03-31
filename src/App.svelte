@@ -10,11 +10,18 @@ let currentTime = new Date();
 let mapLat = 0;
 let mapLon = 0;
 
-const API_KEY = "c563f6540a479d7850bc8da40bcdfb8d";
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY as string;
 
 async function fetchWeather(query: string) {
   loading = true;
   error = "";
+
+  if (!API_KEY) {
+    error = "Missing API key. Set VITE_OPENWEATHER_API_KEY.";
+    loading = false;
+    return;
+  }
+
   try {
     const res = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${API_KEY}`
@@ -36,6 +43,12 @@ async function fetchWeather(query: string) {
 }
 
 async function fetchByCoords(lat: number, lon: number) {
+  if (!API_KEY) {
+    error = "Missing API key. Set VITE_OPENWEATHER_API_KEY.";
+    loading = false;
+    return;
+  }
+
   try {
     const res = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
